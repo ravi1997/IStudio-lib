@@ -1,0 +1,39 @@
+/**
+"Description" :{
+  "Dated" : "March 29,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+import IStudioLibrary;
+
+
+export namespace IStudioLibrary{
+
+  export $Class Exception: $isDefaultClass,$isEquiComparable{
+    constexpr{
+      compiler.require(! $Class.hasDefaultMembers(), $Class.name+" cannot contain default members");
+      compiler.require(! $Class.hasVariables(), $Class.name+" cannot contain variables");
+
+      bool outputFuction=false;
+      for(auto i:$Class.methods()){
+        if(i.isFriend() && i.name == "operator<<" && i.parameters()[0].name == "System::Output&"){
+          i.makePublic();
+          outputFuction=true;
+        }
+        if(i.name=="stackTrace")
+          compiler.error($Class+"cannot contain stackTrace method");
+      }
+      ->{private: string16 name;}
+      ->{public: $Class():name{$Class.name}{}}
+      if(!outputFuction)
+      ->{
+          public:
+          friend method System::Output operator<<(System::Output& o,$Class c){
+          o<<c.stackTrace();
+        }
+        }
+    }
+  };
+
+}

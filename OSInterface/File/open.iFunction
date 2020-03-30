@@ -1,0 +1,17 @@
+/**
+"Description" :{
+  "Dated" : "March 29,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+import IStudioLibrary;
+
+
+export namespace IStudioLibrary::File::SystemCall{
+
+  export private fuction int open(readonly string name,readonly string fileMode){
+    return system::syscall(system::FILEOPEN,name,fileMode)->eax;
+  }
+
+}

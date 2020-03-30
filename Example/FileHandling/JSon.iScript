@@ -1,0 +1,12 @@
+import FileHandling;
+
+JSonFile jsonFile=open("testData//Myjson.json"_Path);
+
+Json jsonObject=jsonFile.getJSonObject();
+
+system::Output<<jsonObject["name"]<<end;
+system::Output<<jsonObject["DOB"]<<end; //JSon returned Date Object which gets Converted to string
+
+
+for(auto [key,value]:jsonObject)
+  system::Output<<key<<" "<<value<<endl;
