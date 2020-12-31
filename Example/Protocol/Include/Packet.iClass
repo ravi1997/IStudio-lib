@@ -1,0 +1,11 @@
+import core;
+
+export class Packet extends Getter, Setter, System.SerialIO{
+    uint_8 version:4_bit=1;
+    uint_8 Hlen:4_bit=0;
+    uint_8 flags:1_byte=0;
+    uint_16 packet_len=8;
+
+    Buffer options;
+    Buffer data;
+};

@@ -1,0 +1,26 @@
+/*
+*   FILE : Viewport.iMClass
+*   AUTHOR : Ravinder Singh
+*   CREATION DATE : 10 AUGUST 2020
+*/
+module IStudioLibrary.GUI;
+
+$class Viewport {
+    for(auto f:$Viewport.getFunctions()){
+        if(f.getName()=="add"){
+            $compiler.error("multiple definition of add found.",
+                             Error.MultipleDefinition,
+                             "First definition found at : " + f.getScope());
+        }
+    }
+
+    ->{
+        private:
+        vector<Screen> elements;
+        public:
+        function add(Screen e)const{
+            e.init();
+            elements.push_back(e);
+        }
+    }
+};

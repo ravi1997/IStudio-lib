@@ -5,12 +5,9 @@
   "Author" : " Ravinder Singh"
 }
 */
-import IStudioLibrary;
+module IStudioLibrary.FileHandling;
 
-
-export namespace IStudioLibrary::FileHandling{
-
-  export class File{
+  class File{
     public:
       Enumeration FileMode{
         READONLY,
@@ -25,14 +22,14 @@ export namespace IStudioLibrary::FileHandling{
       FileMode fileMode;
       bool open=false;
     public:
-      File(readonly String fileName,readonly FileMode f):name{fileName},fileMode{f}{}
+      File([readonly moveonly] String fileName,readonly FileMode f):name{fileName},fileMode{f}{}
       ~File(){
         if(open)
           close();
       }
 
       method open()throws fileException,UnknownException{
-        int x=File::SystemCall::open(name,toString(fileMode));
+        int x=OS.File.SystemCall.open(name,toString(fileMode));
         if(x==0)
           open=true;
         else if(x==1)
@@ -45,14 +42,14 @@ export namespace IStudioLibrary::FileHandling{
 
       method close(){
           if(open)
-            File::SystemCall::close(name);
+            OS.File.SystemCall.close(name);
       }
 
 
       method [$Class x] read() [[require: $x.isWritable()]] throws fileException{
         if(open){
             int error;
-            [x,error]=File::SystemCall::read(name);
+            [x,error]=OS.File.SystemCall.read(name);
             if(error==0)
               return x;
             else if(error==1)
@@ -67,7 +64,7 @@ export namespace IStudioLibrary::FileHandling{
       method write(readonly $Class x){
         if(open){
           int error;
-          error=File::SystemCall::write(name,x);
+          error=OS.File.SystemCall.write(name,x);
           if(error==0)
             return x;
           else if(error==1)
@@ -81,4 +78,3 @@ export namespace IStudioLibrary::FileHandling{
 
   };
 
-}

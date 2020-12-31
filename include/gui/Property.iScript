@@ -1,0 +1,12 @@
+/*
+*   FILE : Property.iScript
+*   AUTHOR : Ravinder Singh
+*   CREATION DATE : 10 AUGUST 2020
+*/
+module IStudioLibrary.GUI.Property;
+
+using Scaling = variant<Percent,Pixel>;
+
+Scaling height,width;
+
+Color color;

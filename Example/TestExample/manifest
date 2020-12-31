@@ -1,0 +1,26 @@
+{
+    "Project Name" : "TestExample",
+    "Author" : "Ravinder Singh",
+    "Creation Date" : "July 08,2020",
+    "Version":"1.0.0.0",
+    "Type":"script",
+    "Output" : "c++",
+    "Default Flags" : {
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-O3"
+    },
+    "Files" : {
+        "source":{
+            "Test.iScript"
+        }
+        "include":{
+            "Person.iClass"
+        }
+    }
+    "Test":{
+        "T1",
+        "T2"
+    }
+}

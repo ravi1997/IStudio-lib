@@ -6,10 +6,7 @@
 }
 */
 
-import IStudioLibrary;
+module IStudioLibrary;
 
-export namespace IStudioLibrary{
+Exception NetworkException{};
 
-  export Exception NetworkException{};
-
-}

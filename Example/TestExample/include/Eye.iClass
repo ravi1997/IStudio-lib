@@ -1,0 +1,3 @@
+module TestExample;
+
+public export class Eye{};

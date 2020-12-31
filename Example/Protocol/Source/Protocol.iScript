@@ -1,0 +1,23 @@
+/*
+    Name : Protocol
+    Date : June 24, 2020
+    Author : Ravinder Singh 
+*/
+
+
+import Network;
+
+TCPServer server{8080_portNo};
+server.setNoTimeOut(true);
+SystemLog logFile{"/tmp/ProgramControl/"+Date.getCurrentDate()+"Log"_path};
+server.setLogFile(logFile);
+server.setOnRecieve(
+    [&](readonly TCPServer s,readonly TCPClient c) -> void{
+        s>>pc;
+        
+    }
+);
+server.activate();
+cowait while(server.accept()){
+    
+}

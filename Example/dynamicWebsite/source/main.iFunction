@@ -1,0 +1,23 @@
+module myWebsite;
+import Network;
+
+function main(Cli.Arguments args){
+    HTTPServer server;
+
+    server.setGetAction([](HTTPRequest req,HTTPResponse res){
+        URL u = req.getURL();
+        try{
+            if(u == "/index.html"){
+                FileHandling.HTMLFile f{Resource.files.index};
+                res.send(f);
+            }
+            else 
+                throw HTTPError{"wrong get request : "+url};
+        }
+        catch(HTTPError e){
+            res.send(e);
+        }
+    });
+
+    server.listen(8080_portno);
+}

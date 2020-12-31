@@ -1,0 +1,58 @@
+/**
+"Description" :{
+  "Dated" : "March 30,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+
+module IStudioLibrary;
+
+
+
+/**
+* @Description @Class is a container that holds the data on stack like format
+* @Params t represents the type of the data
+* @Params s represents the slot for the stack default is zero
+* @Params a represents the Allocator for the data
+*/
+template<typename t,unsigned int s,typename a>
+class Stack;
+
+template<typename t,unsigned int s=0,typename a=Allocator<t>>
+constexpr class Stack{
+    public:
+        using datatype=t;
+        using sizeType=unsigned int;
+        using Allocator=a;
+        //using iterator = Iterator<>;
+    
+    private:
+        vector<datatype,Allocator> data;
+    public:
+        Stack():data{}{
+            data.resize(s);
+        }
+        
+        function push_back([moveonly readonly]datatype t) throws ExceptionMemoryOverFlow
+                            [[expects:!isFull()]]
+                            [[ensures:!isEmpty()]]
+        {
+            data.push_back(d);
+        }
+
+        function moveonly datatype pop_back() throws ExceptionMemoryUnderflow
+                            [[expects:!isEmpty()]]
+        {
+            return data.pop_back();
+        }
+
+
+        function bool isFull() nothrow{
+            return (s!=0 && data.isFull())||(s==0);
+        }
+
+        function bool isEmpty() nothrow{
+            return data.isEmpty();
+        }
+};

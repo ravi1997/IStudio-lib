@@ -1,0 +1,9 @@
+module TestExample;
+
+pubic export class Person : public $getter, public $setter
+{
+    Skin skin;
+    Voice voice;
+    Eye eye;
+    int_8 height; 
+};

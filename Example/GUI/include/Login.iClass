@@ -1,0 +1,31 @@
+module GUIExample;
+import GUI;
+
+
+Veiwport Login inherits Container.Fluid{
+    private:
+        Text login = "Login";
+        TextFeild loginText = PlaceHolder{"Login Id"};
+        Text password = "Password";
+        TextFeild passwordText = PlaceHolder{"Password"};
+        Button loginButton = "Login";
+        Screen screen;
+    public:
+        Login(){
+            screen.add(
+                Grid{
+                    Grid{login,loginText},
+                    Grid{password,passwordText},
+                    loginButton
+                }
+            );
+            add(screen);
+            loginButton.onClick(
+                []()->void
+                [[expects : loginText != "" && passwordText != "", "Login & Password can't be empty"]]
+                {
+                    System.output.println("Login : " + loginText + "Password : " + passwordText);
+                }
+            );
+        }
+};

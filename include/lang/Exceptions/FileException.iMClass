@@ -1,0 +1,19 @@
+/**
+"Description" :{
+  "Dated" : "March 29,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+module IStudioLibrary;
+
+
+  $Class FileException extends Exception{
+    constexpr{
+      compiler.require(! $FileException.hasDefaultMembers(), $FileException.name+" cannot contain default members");
+      compiler.require(! $FileException.hasVariables(), $FileException.name+" cannot contain variables");
+
+    }
+  };
+
+

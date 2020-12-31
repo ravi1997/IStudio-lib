@@ -1,0 +1,39 @@
+/**
+"Description" :{
+  "Dated" : "March 30,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+
+module IStudioLibrary.Network;
+
+constexpr class IPV_4 extends RuleOfFiveConstructible{
+    private:
+        uint_8 a=0;
+        uint_8 b=0;
+        uint_8 c=0;
+        uint_8 d=0;
+        uint_8 mask;
+    public:
+        IPV_4(uint_8 w,uint_8 x,uint_8 y,uint_8 z,uint_8 m ):a{w},b{x},c{y},d{z},mask{m}{}
+            
+        function bool operator==(readonly IPV_4 ip)const{
+            return a==ip.a && b==ip.b && c==ip.c && d==ip.d && mask==ip.mask;
+        }
+
+        function bool operator!=(readonly IPV_4 ip)const{
+            return !(self==ip);
+        }
+
+        function readonly IPV_4 operator/(readonly uint_8 x){
+            if constexpr ($compiler.getContext().isConstexpr())
+                static_assert(x<=>[1:32],"Mask for ip address can only in range of 1 - 32");
+            else 
+                assert(x<=>{1:32},"Mask for ip address can only in range of 1 - 32");
+            
+            mask=x;
+
+            return self;
+        }
+};

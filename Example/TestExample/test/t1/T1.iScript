@@ -1,0 +1,3 @@
+import test; // importing essentials
+
+Test.getTestSuiteScriptByName("Setter")|TestExample.Person{};  // get registered suite and run on value

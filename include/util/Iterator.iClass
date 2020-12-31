@@ -1,0 +1,26 @@
+/**
+"Description" :{
+  "Dated" : "March 30,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+import IStudioLibrary;
+
+
+export namespace IStudioLibrary{
+
+  template<typename t>
+  export class Iterator requires isDefaultConstructable<t> && isAssignable<t>{
+    public:
+      export enumeration IteratorType{
+        FORWARDITERATOR,
+        BACKWARDITERATOR,
+        BIDIRECTIONALITERATOR,
+        RANDOMITERATOR
+      };
+    private:
+
+
+  };
+}

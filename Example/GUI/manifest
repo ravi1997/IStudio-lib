@@ -1,0 +1,26 @@
+{
+    "Project Name" : "TestExample",
+    "Author" : "Ravinder Singh",
+    "Creation Date" : "July 08,2020",
+    "Update Date" : "July 08,2020",
+    "Version":"1.0.0.0",
+    "Type":"Build",
+    "Operating Type" : "IStudio",
+    "Output" : "Web",
+    "Default Flags" : {
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-O3"
+    },
+    "Files" : {
+        "source":{
+            "main.ipp"
+        }
+        "include":{
+            "Login.iClass"
+        }
+    }
+    "Test":{
+    }
+}

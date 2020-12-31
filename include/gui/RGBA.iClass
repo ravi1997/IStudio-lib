@@ -1,0 +1,26 @@
+/*
+*   FILE : Placeholder.iClass
+*   AUTHOR : Ravinder Singh
+*   CREATION DATE : 10 AUGUST 2020
+*/
+module IStudioLibrary.GUI;
+
+constexpr class RGB extends Default{
+    public:
+        uint_8 red = 0;
+        uint_8 green = 0;
+        uint_8 blue = 0;
+        uint_8 a=0;
+
+        RGB(const HEX& h)
+            [[ expects : h.length()==8]]
+            :
+            red{h.get(1,2).toUint_8()},
+            green{h.get(3,4).toUint_8()},
+            blue{h.get(5,6).toUint_8()},
+            a{h.get(7,8).toUint_8()}
+            {}
+
+        
+
+};

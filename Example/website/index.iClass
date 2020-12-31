@@ -1,0 +1,111 @@
+/**
+*	Author : RAVINDER SINGH
+*	Creation Date : AUGUST 27, 2020
+*	Description : This file contain the code for website
+*/
+
+
+module myWebsite;
+
+import gui;
+
+Viewport index inherit Container.fluid{
+	Colossal colossal;
+	
+	Navbar nav;
+	
+	Text companyName = "F.O.W";
+	Logo logo = Resource.Image.Logo;
+	
+	Link home = "Home";
+	Link about = "About Us";
+	Link download = "Download";
+	Link tutorial = "Tutorial";
+	Link contact = "Contact Us";
+	
+	
+	Section homeSection;
+	Section aboutSection;
+	Section downloadSection;
+	Section tutorialSection;
+	Section contactSection;
+	
+	index(){
+		inherit(Templates.Themes.Dark);
+
+		colossal.insertImages(
+			Resource.Images.C1,
+			Resource.Images.C2,
+			Resource.Images.C3
+		);
+		colossal.setAutoScroll(true);
+
+		logo.setProperty(Property.RoundLogo);
+
+		nav.setLogo(logo);
+		nav.setCompanyName(companyName);
+		nav.setProperty(Property.NavbarRightAlign);
+		nav.setProperty(Property.NavbarFluid);
+
+		home.setLocation(homeSection);
+		about.setLocation(aboutSection);
+		download.setLocation(downloadSection);
+		tutorial.setLocation(tutorialSection);
+		contact.setLocation(contactSection);
+
+
+
+		nav.setItems(
+			home,
+			about,
+			download,
+			tutorial,
+			contact
+		);
+
+
+		homeSection.add(
+			GridRow_3x1{
+				""_p,
+				"Resource/Images/home.jpeg"_img
+			}
+		);
+
+		
+		about.add(
+			Grid{
+				"Who we are"_Heading,
+				Grid{
+					Templates.Elements.Cards.PortFolio{
+						Resource.Images.Employ.Ravinder,
+						"Ravinder Singh",
+						"Author",
+						"I want to create something that can shape the future",
+						Property.Overlay
+					},
+					
+					Templates.Elements.Cards.PortFolio{
+						Resource.Images.Employ.Priyanshu,
+						"Ravinder Singh",
+						"Direction Head",
+						"I want to create something that can shape the future",
+						Property.Overlay
+					}
+				}
+			}
+		);
+
+		///any section were there is no add statement will form only empty divisions
+
+		add(
+				colossal,
+				Navbar,
+				homeSection,
+				aboutSection,
+				downloadSection,
+				tutorialSection,
+				contactSection
+		);
+
+	}
+}

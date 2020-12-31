@@ -1,0 +1,82 @@
+/**
+"Description" :{
+  "Dated" : "August 14,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+
+module IStudioLibrary.lang;
+
+class Integer extends IStudioLibrary.lang.RuleOfFiveConstructible,IStudioLibrary.lang.RelationalComparable{
+    private:
+        Enumeration Type{
+            INT8,
+            INT16,
+            INT32,
+            INT64,
+            UINT8,
+            UINT16,
+            UINT32,
+            UINT64
+        };
+        
+        using DataType = IStudioLibrary.util.variant<
+            Int_8,
+            Int_16,
+            Int_32,
+            Int_64,
+            Uint_8,
+            Uint_16,
+            Uint_32,
+            Uint_64
+        >;
+        Type type;
+        DataType data;
+
+    public:    
+        Integer(IStudioLibrary.lang.Integeral auto x):data{x}{
+            constexpr{
+                if(isSameValue<decltype(x),Int_8>)
+                  type=Type::INT8;
+                else if(isSameValue<decltype(x),Int_16>)
+                  type=Type::INT16;
+                else if(isSameValue<decltype(x),Int_32>)
+                  type=Type::INT32;
+                else if(isSameValue<decltype(x),Int_64>)
+                  type=Type::INT64;
+                else if(isSameValue<decltype(x),Uint_8>)
+                  type=Type::UINT8;
+                else if(isSameValue<decltype(x),Uint_16>)
+                  type=Type::UINT16;
+                else if(isSameValue<decltype(x),Uint_32>)
+                  type=Type::UINT32;
+                else 
+                    type=Type::UINT64;
+            }
+        }
+
+
+        function writeonly Integer operator=(IStudioLibrary.lang.Integeral auto x){
+          data=x;
+          constexpr{
+                if(isSameValue<decltype(x),Int_8>)
+                  type=Type::INT8;
+                else if(isSameValue<decltype(x),Int_16>)
+                  type=Type::INT16;
+                else if(isSameValue<decltype(x),Int_32>)
+                  type=Type::INT32;
+                else if(isSameValue<decltype(x),Int_64>)
+                  type=Type::INT64;
+                else if(isSameValue<decltype(x),Uint_8>)
+                  type=Type::UINT8;
+                else if(isSameValue<decltype(x),Uint_16>)
+                  type=Type::UINT16;
+                else if(isSameValue<decltype(x),Uint_32>)
+                  type=Type::UINT32;
+                else 
+                    type=Type::UINT64;
+            }
+        }
+
+};

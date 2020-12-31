@@ -1,0 +1,20 @@
+module TestExample;
+import test;
+
+"Setter"_testSuiteScript = [](any p){
+    "setSkin"_testCase = [&]() nothrow
+            [[expects : $p.getFunctions().hasFunctionByName("setSkin"),"setSkin function Not Found"]]
+            [[ensures : p.getSkin() == "Black","Skin value not set"]]
+    {
+        p.setSkin("Black");
+    };
+};
+
+"Getter"_testSuiteScript = [](any p){
+    "setSkin"_testCase = [&]() nothrow
+            [[expects : $p.getFunctions().hasFunctionByName("getSkin"),"getSkin function Not Found"]]
+            [[ensures : p.getSkin() == "Black","Skin value not set"]]
+    {
+        p.setSkin("Black");
+    };
+};

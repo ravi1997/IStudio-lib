@@ -1,0 +1,15 @@
+/*
+*   FILE : Placeholder.iClass
+*   AUTHOR : Ravinder Singh
+*   CREATION DATE : 10 AUGUST 2020
+*/
+module IStudioLibrary.GUI;
+
+class Color{
+    private:
+        
+    public:
+        Color(){}
+
+
+};

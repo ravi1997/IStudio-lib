@@ -1,0 +1,20 @@
+/*
+*   FILE : Screen.iClass
+*   AUTHOR : Ravinder Singh
+*   CREATION DATE : 10 AUGUST 2020
+*/
+module IStudioLibrary.GUI;
+
+class Screen{
+    private:
+        vector<Element> element;
+    public:
+        function add(Element e){
+            element.push_back(e);
+        }
+
+        function init(){
+            for(auto e : element)
+                e.init();
+        }
+};

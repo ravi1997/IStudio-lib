@@ -1,0 +1,32 @@
+module IStudioLibrary.lang;
+
+$Class RuleOfFiveConstructible{
+
+    if(!$RuleOfFiveConstructible.hasDefaultConstructor()){
+        ->{
+            public:
+                $RuleOfFiveConstructible()=default;
+        }
+    }
+
+    if(!$RuleOfFiveConstructible.hasCopyConstructor()){
+        ->{
+            public:
+                $RuleOfFiveConstructible(readonly $RuleOfFiveConstructible)=default;
+        }
+    }
+
+    if(!$RuleOfFiveConstructible.hasMoveConstructor()){
+        ->{
+            public:
+                $RuleOfFiveConstructible(moveonly $RuleOfFiveConstructible)=default;
+        }
+    }
+    
+    if(!$RuleOfFiveConstructible.hasAssignmentOperator()){
+        ->{
+            public:
+                function $RuleOfFiveConstructible(moveonly $RuleOfFiveConstructible)=default;
+        }
+    }
+};

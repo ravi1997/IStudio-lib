@@ -1,0 +1,23 @@
+{
+    "editor.tokenColorCustomizations": {
+        "comments": "#616066",
+    },
+    "editor.suggest.showKeywords": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/.vscode": true,
+        ".vscode": true
+    },
+    "explorerExclude.backup": null,
+    "cSpell.words": [
+        "Ravinder",
+        "moveonly",
+        "readonly",
+        "writeonly"
+    ],
+        
+}

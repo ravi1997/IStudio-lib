@@ -1,0 +1,50 @@
+import ML;
+import FileHandling;
+
+Face my=Face{ANN{"ANN.json.cfg"_path}};
+Faces friends=Faces{
+                  ANN{"priya.json.cfg"_path},
+                  ANN{"nitin.json.cfg"_path}
+              };
+
+
+
+for(JPEG file : "testing"_Folder){
+  file.moveIf(my.Match(file), "result/my/"+file).
+       moveElseIf(friends.Match(file), "result/friends/"+file).
+       moveElseIf(ANN.textDetection(file)>0.70, "result/file/"+file).
+       move("result/junk/"+file);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+for(JPEG file: "testing"_Folder){
+
+  for(Face face:Face.detectFaces(file)){
+    if(my.Match(face))
+      File.move(file,"result/my/"+file);
+    else if(friends.match(face))
+      File.move(file,"result/friends/"+file);
+  }
+  if(Face.detectFaces(file).size()==0){
+    if(ANN.textDetection(file)>0.70){
+      // Checks that file contain more than 70 percent text
+      File.move(file,"result/file/"+file);
+    }
+    else
+      File.move(file,"test/junk/"+file);
+  }
+}

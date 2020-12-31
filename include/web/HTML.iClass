@@ -1,0 +1,65 @@
+/**
+"Description" :{
+  "Dated" : "April 26,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+import IStudioLibrary;
+
+
+export namespace IStudioLibrary{
+    export namespace Html{
+      export $class HTMLElement{
+        public:
+          constexpr{
+            auto constructors=$HTMLElement.getConstructors();
+            auto flag=false;
+            for(auto constructor:constructors){
+              if( constructor.hasParameters() && 
+                  constructor.getParameters().length()==3 && 
+                  constructor.getParameters()[0].name=="$HTMLAttribute" &&
+                  constructor.getParameters()[2].name=="Style" &&
+                ){
+                  flag=true;
+                  break;
+                }
+            }
+            if(!flag)
+              $compiler.error($HTMLElement.getName()+" Type must have a consturctor with the following syntax")
+          }
+      };
+      class HTML;
+      HTMLElement Header;
+      HTMLElement Body;
+      class Style;
+      class Title;
+      class P;
+      class A{
+        string_32 name;
+        vector<>
+        public:
+          A()
+
+
+      };
+      class Table;
+
+
+
+
+
+      export class HTML{
+          DoctypeDeclaration doctype;
+          Header header;
+          Body body;
+
+          public:
+              HTMl(DoctypeDeclaration d,Header h,Body b):doctype{d},header{h},body{b}{}
+              HTMl(Header h,Body b):header{h},body{b}{}
+      };
+
+    }
+
+
+}

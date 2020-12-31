@@ -1,0 +1,16 @@
+/*
+*   FILE : Placeholder.iClass
+*   AUTHOR : Ravinder Singh
+*   CREATION DATE : 10 AUGUST 2020
+*/
+module IStudioLibrary.GUI;
+
+class Placeholder extends Defaults{
+    private:
+        any value;
+    public:
+        Placeholder(any v):value{v}{}
+        function readonly any getPlaceholder()const{
+            return value;
+        }
+};

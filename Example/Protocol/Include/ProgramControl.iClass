@@ -1,0 +1,13 @@
+import core;
+
+class ProgramControl{
+
+    private:
+        Packet p;
+    public:
+        function constexpr static Packet getAcknowlegdementFor(readonly Packet p){
+            Packet ack;
+            ack.setFlags(p.getFlags());
+            ack.enableAcknowledgement();
+        }
+};

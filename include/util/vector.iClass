@@ -1,0 +1,105 @@
+/**
+"Description" :{
+  "Dated" : "March 30,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+import IStudioLibrary;
+
+
+export namespace IStudioLibrary{
+
+  template<typename t,typename A=Allocator<t>>
+  export constexpr class Vector{
+    public;
+      using datatype=t;
+      using allocatorType=A;
+      static_assert(isCopyConstructible<datatype>::value, "The Type({}) is not Copy Consturctible"_Format($datatype.getAlias().getName()));
+      using sizeType=uint_64;
+
+    private:
+      SharedPointer<datatype,true,AllocatorType> data;
+      uint_64 size=0;
+      uint_64 capacity=4;
+      bool fixedSize=false;
+    public:
+      Vector() = default;
+      Vector(readonly Vector v):data{v.data()},size{v.size} throws ExceptionMemoryOverFlow {}
+      Vector(moveonly Vector v):data{v.data()},size{v.size} nothrow {}
+
+      Vector(const uint_64 s):size{0},capacity{s}{}
+
+      function Vector& operator=(readonly Vector v) throws ExceptionMemoryOverFlow {
+        if constexpr (compiler.getContext().isConstexpr())
+          static_assert((v.size==size) || (fixedSize==false), "The Passed vector is not of the same configuration as current vector");
+        else
+          assert((v.size==size) || (fixedSize==false), "The Passed vector is not of the same configuration as current vector");
+        
+        clear();
+        for(auto elements:v)
+          push_back(elements);
+        
+        return self;
+      }
+
+
+      function readonly sizeType getSize()const{
+        return  size;
+      }
+
+      function readonly sizeType getCapacity()const{
+        return  capacity;
+      }
+
+      function readonly bool isFull()const{
+        return capacity==size;
+        
+      }
+
+      function readonly bool isEmpty()const{
+        return size==0;
+      }
+
+      function resize(sizeType num) throws ExceptionMemoryOverFlow
+                      [[expects:getSize()<num]]
+      {
+        capacity=num;
+        data.resize(num);
+      }
+      
+
+
+      function push_back([moveonly readonly]datatype t) throws ExceptionMemoryOverFlow
+				                          [[expects:!isFull()]]
+                                  [[ensures:!isEmpty()]]
+      {
+        if(!fixedSize && capacity==size)
+          data.resize(2*capacity);
+
+        data[size]=data[size-1];
+        data[size-1]=t;
+        size++;
+      }
+
+      function [moveread datatype temp] pop_back() nothrow
+                                    [[expects:!isEmpty()]]
+      {
+        temp=data[size-1];
+        size--;
+        if(size==capacity/4)
+          data.resize(capacity/4);
+      }
+
+
+      function readonly datatype operator[](sizeType i)const{
+        return data[i];
+      }
+
+      function readonly datatype operator[](sizeType i){
+        return data[i];
+      }
+      
+      
+
+  };

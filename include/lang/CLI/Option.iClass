@@ -1,0 +1,66 @@
+module IStudioLibrary.lang.CLI;
+
+class Option extends IStudioLibrary.lang.Copyable,IStudioLibrary.lang.Assignable{
+    private:
+        IStudioLibrary.lang.String name;
+        Enumeration Type {
+            BOOLEAN,
+            INTEGER,
+            STRING,
+            FLOAT,
+            CALLABLE
+        };
+        using valuetype = IStudioLibrary.util.Variant<
+            IStudioLibrary.lang.ReferenceWrapper<IStudioLibrary.lang.Boolean>,
+            IStudioLibrary.lang.ReferenceWrapper<IStudioLibrary.lang.Integer>,
+            IStudioLibrary.lang.ReferenceWrapper<IStudioLibrary.lang.String>,
+            IStudioLibrary.lang.ReferenceWrapper<IStudioLibrary.lang.Float>,
+            IStudioLibrary.lang.ReferenceWrapper<IStudioLibrary.lang.Function<void()>>
+        >;
+        using Datatype = IStudioLibrary.lang.Pair<Type,valuetype>;
+
+        Datatype data;
+        IStudioLibrary.util.vector<IStudioLibrary.lang.String> options;
+        IStudioLibrary.lang.String description = "";
+        IStudioLibrary.lang.Boolean compulosry = false;
+    public:
+
+        constexpr{
+            auto t = [](auto x){
+                switch constexpr ($x.getType()){
+                    case IStudioLibrary.lang.Boolean : return Type :: BOOLEAN;
+                    case IStudioLibrary.lang.Integer : return Type :: INTEGER;
+                    case IStudioLibrary.lang.String : return Type :: STRING;
+                    case IStudioLibrary.lang.Float : return Type :: FLOAT;
+                    case IStudioLibrary.lang.Function<void()>> : return Type :: CALLABLE;
+                }
+            };
+            auto list  = TypeList<IStudioLibrary.lang.Boolean,
+                                  IStudioLibrary.lang.Integer,
+                                  IStudioLibrary.lang.String,
+                                  IStudioLibrary.lang.Float,
+                                  IStudioLibrary.lang.Function<void()>>{};
+            for(auto x : list)
+            ->{
+                Option(IStudioLibrary.lang.String n,$x.getType() d,IStudioLibrary.lang.Boolean c = false):
+                name{n},
+                data{t(d),d},
+                compulosry{c}
+                {}
+
+            }
+
+
+
+        }
+
+        
+        Option& operator()(IStudioLibrary.lang.String s) {
+            description = s;
+            return self;
+        }
+
+
+
+
+};

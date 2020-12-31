@@ -1,0 +1,19 @@
+class CLI extends IStudioLibrary.lang.RuleOfFiveConstructible{
+    private:
+        Enumeration Type{
+            OPTION,
+            ARGUMENT
+        };
+        using DataType = IStudioLibrary.Util.Variant<IStudioLibrary.lang.CLI.Option,IStudioLibrary.lang.CLI.Argument>;
+        using Argument = IStudioLibrary.Util.Pair<Type,DataType>;
+        vector<Argument> argument;
+        constexpr class EmptyCondition extends IStudioLibrary.lang.DefaultPrivate,IStudioLibrary.lang.RuleOfFiveConstructible{
+            friend class IStudioLibrary.lang.CLI.CLI;
+        };
+
+
+    public:
+
+        consteval static EmptyCondition Compulsory = EmptyCondition{}; 
+
+};

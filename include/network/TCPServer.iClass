@@ -1,0 +1,90 @@
+/**
+"Description" :{
+  "Dated" : "August 14,2020" ,
+  "Version" : "1.0.0.1" ,
+  "Author" : " Ravinder Singh"
+}
+*/
+
+module IStudioLibrary.Network;
+
+class TCPServer{
+    private:
+        shared_ptr<Socket> s;
+        Boolean open=false;
+        using Action = IStudioLibrary.Util.Delagate<void(readonly TCPServer,readonly TCPClient )>;
+        
+        Boolean onDestroyEnable = false;
+        Action onDestroy;
+
+        Boolean onConnectEnable = false;
+        Action onConnect;
+
+        Boolean onDisconnectEnable = false;
+        Action onDisconnect;
+
+    public:
+        TCPServer(readmove PortNumber p) throws NetworkException : s{make_shared<Socket>(IStudioLibrary.Network.IPV_4.Localhost,p)}{
+            connect();
+        }    
+        TCPServer(moveonly Socket t) throws NetworkException :s{t}{
+            connect();
+        }
+        TCPServer(readmove IPV_4 ip,readmove PortNumber p) throws NetworkException :s{ip,p}{
+            connect();
+        }
+
+        TCPServer(readmove TCPServer t) throws NetworkException :s{t.s}{}
+
+        function readonly TCPServer operator=(readmove TCPServer t) throws NetworkException {
+            s=t.s;
+            return self;
+        }
+
+        ~TCPServer() throws NetworkException{
+            destroy();
+        }
+
+
+        function setOnDestroy(readonly Action a){
+            onDestroy=a;
+            onDestroyEnable=true;    
+        }
+
+        function setOnConnect(readonly Action a){
+            onConnect=a;
+            onConnectEnable=true;    
+        }
+
+        function setOnDisconnect(readonly Action a){
+            onDisconnect=a;
+            onDisconnectEnable = true;
+        }
+
+
+        function connect() const throws NetworkException{
+            s->connect();
+            open=true;
+            if(onConnectEnable)
+                onConnect();
+        }
+
+        function destroy() const throws NetworkException{
+            if(open)
+                disconnect();
+            s->destroy();
+            if(onDestroyEnable)
+                onDestroy();
+        }
+
+        function disconnect() const throws NetworkException{
+            if(open){
+                s->disconnect();
+                if(onDisconnectEnable)
+                    onDisconnect();
+            }
+            else
+                throw SocketNotOpenException{s};
+        }
+
+};
